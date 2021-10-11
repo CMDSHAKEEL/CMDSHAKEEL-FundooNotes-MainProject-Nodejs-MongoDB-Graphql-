@@ -37,7 +37,7 @@ const resolvers={
             }
             const userPresent = await userModel.findOne({ email: path.email });
             if (!userPresent) {
-              return new ApolloError.AuthenticationError('Invalid Email id', { email: 'Not Found' });
+              return new Apollerror.AuthenticationError('Invalid Email id Enter Valid id', { email: 'Not Found' });
             }
 
             return login;
