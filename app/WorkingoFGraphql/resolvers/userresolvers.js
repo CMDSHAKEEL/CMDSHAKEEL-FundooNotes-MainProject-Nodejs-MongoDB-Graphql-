@@ -8,7 +8,7 @@ const resolvers={
         } 
     },
     Mutation:{
-        createuser:async (_,{args})=>{
+        createuser:async (_,{path})=>{
             const {firstName,lastName,email,password} = path;
             const post = new userModel({firstName,lastName,email,password})
             await post.save()
