@@ -11,10 +11,6 @@ const resolvers={
     },
     Mutation:{
         createuser:async (_,{path})=>{
-           // const {firstName,lastName,email,password} = path;
-            //const post = new userModel({firstName,lastName,email,password})
-           // await post.save()
-          //  return post;
           const user = new userModel({
               firstName:path.firstName,
               lastName:path.lastName,
@@ -33,6 +29,18 @@ const resolvers={
             return user;
  
 
+        },
+        loginuser:async(_,{path})=>{
+            const login ={
+                email:path.email,
+                password:path.password
+            }
+            const userPresent = await userModel.findOne({ email: path.email });
+            if (!userPresent) {
+              return new ApolloError.AuthenticationError('Invalid Email id', { email: 'Not Found' });
+            }
+
+            return login;
         }
          
     }
