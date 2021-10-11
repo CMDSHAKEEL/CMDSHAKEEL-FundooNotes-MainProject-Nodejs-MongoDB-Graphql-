@@ -3,7 +3,6 @@ const { ApolloServer, gql} = require('apollo-server-express')
 const dbConfig =  require('./DB.Config/database.config')
 const Schema = require('././app/WorkingoFGraphql/schema/index')
 const graphqlresolver =require('././app/WorkingoFGraphql/resolvers/index')
- 
 require('dotenv').config();
 
 dbConfig.dbConnection();
