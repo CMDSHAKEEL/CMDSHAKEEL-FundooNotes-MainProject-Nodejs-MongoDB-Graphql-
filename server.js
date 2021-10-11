@@ -1,5 +1,5 @@
 const express = require('express');
-const { ApolloServer, gql} = require('apollo-server-express')
+const { ApolloServer, gql} = require('apollo-server')
 const dbConfig =  require('./DB.Config/database.config')
  
 const app = express()
