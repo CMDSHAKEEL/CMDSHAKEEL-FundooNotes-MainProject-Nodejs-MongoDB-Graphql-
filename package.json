@@ -1,0 +1,32 @@
+{
+  "name": "Fundoo-Notes-Project-Main",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CMDSHAKEEL/FundooNotes-MainProject-Nodejs-MongoDB-Graphql-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CMDSHAKEEL/FundooNotes-MainProject-Nodejs-MongoDB-Graphql-/issues"
+  },
+  "homepage": "https://github.com/CMDSHAKEEL/FundooNotes-MainProject-Nodejs-MongoDB-Graphql-#readme",
+  "dependencies": {
+    "apollo-server-express": "^3.3.0",
+    "body-parser": "^1.19.0",
+    "epress": "0.0.1-security",
+    "express": "^4.17.1",
+    "graphql": "^15.6.1",
+    "mongoose": "^6.0.10"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  }
+}
