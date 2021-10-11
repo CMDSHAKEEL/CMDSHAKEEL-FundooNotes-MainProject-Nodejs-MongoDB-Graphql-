@@ -15,7 +15,8 @@ const apolloserver = new ApolloServer({
 await apolloserver.start();
 apolloserver.applyMiddleware({app})
 
-app.listen(2000,()=>{console.log("server is runnig 2000")})
+app.listen(2000,()=>{
+    console.log("server is runnig 2000")})
 
 }
 startserver()

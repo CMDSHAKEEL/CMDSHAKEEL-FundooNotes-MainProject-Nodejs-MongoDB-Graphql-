@@ -1,5 +1,6 @@
 const userModel = require('../../models/usermodel')
 const Apollerror = require('apollo-server-errors')
+const joiValidation = require('../../utilities/Validation')
 const resolvers={
     Query:{
          
@@ -20,9 +21,13 @@ const resolvers={
               email:path.email,
               password:path.password
             })
+            const Validation = joiValidation.authRegister.validate(user._doc);
+            if(Validation.error){
+                return new Apollerror.ValidationError(Validation.error)
+            }
             const existinguser = await userModel.findOne({ email:path.email})
             if(existinguser){
-                 return new Apollerror.UserInputError("all exist")
+                 return new Apollerror.UserInputError("Email exist already")
             }
               user.save();
             return user;

@@ -27,6 +27,7 @@
     "epress": "0.0.1-security",
     "express": "^4.17.1",
     "graphql": "^15.6.1",
+    "joi": "^17.4.2",
     "mongoose": "^6.0.10"
   },
   "devDependencies": {
