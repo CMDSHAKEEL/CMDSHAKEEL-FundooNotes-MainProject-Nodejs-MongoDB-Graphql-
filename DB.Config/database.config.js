@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 exports.dbConnection=()=>{
 mongoose.Promise = global.Promise;
 // Connecting to the database
-mongoose.connect( "mongodb://localhost:27017/Cmdshakeel21", {
+mongoose.connect( "mongodb://localhost:27017/Fundoonotes-App", {
     useNewUrlParser: true
 }).then(() => {
     console.log("Successfully connected to the database");    
