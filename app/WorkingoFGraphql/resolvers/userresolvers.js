@@ -1,3 +1,6 @@
+
+// importing files and packages
+
 const userModel = require('../../models/usermodel')
 const Apollerror = require('apollo-server-errors')
 const joiValidation = require('../../utilities/Validation')
@@ -6,6 +9,9 @@ const bcrtpt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 const resolvers={
+
+    //in Query we can get all data present in database
+
     Query:{
          
         users: async ()=>{
@@ -13,6 +19,9 @@ const resolvers={
 
         } 
     },
+
+    //in Mutation we update and delete and insert data
+
     Mutation:{
         createuser:async (_,{path})=>{
           const user = new userModel({
@@ -21,14 +30,23 @@ const resolvers={
               email:path.email,
               password:path.password
             })
+
+            // implmentig regex pattern for input data
+
              const Validation = joiValidation.authRegister.validate(user._doc);
              if(Validation.error){
                  return new Apollerror.ValidationError(Validation.error)
              }
+
+             //checking email should unique for creating new user
+
             const existinguser = await userModel.findOne({ email:path.email})
             if(existinguser){
                  return new Apollerror.UserInputError("Email exist already")
             }
+
+            // using bcrypt for sequre password to be saved in database and using salt 
+
             bcryptpass.hash(path.password, (error,data)=>{
                 if(data){
                     user.password = data
