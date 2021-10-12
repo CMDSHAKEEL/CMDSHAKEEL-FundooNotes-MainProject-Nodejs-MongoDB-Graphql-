@@ -13,7 +13,7 @@ type Users{
 }
 
 type Authuser{
-    _id:ID
+    userId:ID
     firstName:String
     lastName:String
     email:String
@@ -31,7 +31,7 @@ input userInput{
 } 
 
 input loginUser{
-    email :String
+    email:String
     password:String
 }
 

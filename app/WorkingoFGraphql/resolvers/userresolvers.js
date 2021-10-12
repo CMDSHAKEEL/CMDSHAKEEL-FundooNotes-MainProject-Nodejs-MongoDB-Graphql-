@@ -2,6 +2,8 @@ const userModel = require('../../models/usermodel')
 const Apollerror = require('apollo-server-errors')
 const joiValidation = require('../../utilities/Validation')
 const  bcryptpass = require('../../utilities/bcrypt')
+const bcrtpt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 const resolvers={
     Query:{
@@ -19,10 +21,10 @@ const resolvers={
               email:path.email,
               password:path.password
             })
-            const Validation = joiValidation.authRegister.validate(user._doc);
-            if(Validation.error){
-                return new Apollerror.ValidationError(Validation.error)
-            }
+             const Validation = joiValidation.authRegister.validate(user._doc);
+             if(Validation.error){
+                 return new Apollerror.ValidationError(Validation.error)
+             }
             const existinguser = await userModel.findOne({ email:path.email})
             if(existinguser){
                  return new Apollerror.UserInputError("Email exist already")
@@ -45,11 +47,22 @@ const resolvers={
                 email:path.email,
                 password:path.password
             }
+            const Validationlogin = joiValidation.authLogin.validate(login);
+            if(Validationlogin.error){
+                return new Apollerror.ValidationError(Validationlogin.error)
+            }
             const userPresent = await userModel.findOne({ email: path.email });
             if (!userPresent) {
               return new Apollerror.AuthenticationError('Invalid Email id Enter Valid id .....');
             }
-             
+            const correct = await  bcrtpt.compare(path.password, userPresent.password);
+            if (! correct) {
+              return new Apollerror.AuthenticationError('wrong password' );
+            }
+            const token =jwt.sign({userId:path.id, email:path.email },'supersecretkey',{
+                expiresIn:'1h'
+            })
+            
         }
          
     }
