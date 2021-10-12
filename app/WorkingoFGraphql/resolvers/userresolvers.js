@@ -62,7 +62,7 @@ const resolvers={
             const token =jwt.sign({userId:path.id, email:path.email },'supersecretkey',{
                 expiresIn:'1h'
             })
-            
+            return{ userId:userPresent.id, token:token,tokenExpiration:1 }
         }
          
     }
