@@ -73,14 +73,24 @@ const resolvers={
             if (!userPresent) {
               return new Apollerror.AuthenticationError('Invalid Email id Enter Valid id .....');
             }
+
+            //checking the password user password and saved password in DB
             const correct = await  bcrtpt.compare(path.password, userPresent.password);
             if (! correct) {
               return new Apollerror.AuthenticationError('wrong password' );
             }
-            const token =jwt.sign({userId:path.id, email:path.email },'supersecretkey',{
+
+            // Token generating
+
+            const token =jwt.sign({  email:path.email  },' cmdshakeel123',{
                 expiresIn:'1h'
             })
-            return{ userId:userPresent.id, firstName:userPresent.firstName,lastName:userPresent.lastName,token:token,tokenExpiration:1 }
+            return{ userId:userPresent.id,
+                                firstName:userPresent.firstName,
+                                             lastName:userPresent.lastName,
+                                                                   token:token,
+                                                                            tokenExpiration:1
+                  }
         }
          
     }
