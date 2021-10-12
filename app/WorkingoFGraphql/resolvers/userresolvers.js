@@ -1,6 +1,8 @@
 const userModel = require('../../models/usermodel')
 const Apollerror = require('apollo-server-errors')
 const joiValidation = require('../../utilities/Validation')
+const  bcryptpass = require('../../utilities/bcrypt')
+
 const resolvers={
     Query:{
          
@@ -25,7 +27,9 @@ const resolvers={
             if(existinguser){
                  return new Apollerror.UserInputError("Email exist already")
             }
-              user.save();
+            bcryptpass.hash(path.password, (error,data)=>{
+                
+            })
             return user;
  
 
@@ -37,10 +41,9 @@ const resolvers={
             }
             const userPresent = await userModel.findOne({ email: path.email });
             if (!userPresent) {
-              return new Apollerror.AuthenticationError('Invalid Email id Enter Valid id', { email: 'Not Found' });
+              return new Apollerror.AuthenticationError('Invalid Email id Enter Valid id .....');
             }
-
-            return login;
+             
         }
          
     }
