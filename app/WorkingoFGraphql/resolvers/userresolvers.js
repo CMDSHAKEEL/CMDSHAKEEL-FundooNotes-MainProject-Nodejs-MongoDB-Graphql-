@@ -91,6 +91,14 @@ const resolvers={
                                                                    token:token,
                                                                             tokenExpiration:1
                   }
+        },
+        forgotpassword: async(_,{path})=>{
+
+            const checkinguser = await userModel.findOne({email:path.email});
+            if(!checkinguser){
+                return new Apollerror.AuthenticationError('user not found .... ')
+            }
+            
         }
          
     }
