@@ -28,7 +28,13 @@ const resolvers={
                  return new Apollerror.UserInputError("Email exist already")
             }
             bcryptpass.hash(path.password, (error,data)=>{
-                
+                if(data){
+                    user.password = data
+                    //console.log(data)
+                }else{
+                    throw error;
+                }
+                user.save();
             })
             return user;
  
