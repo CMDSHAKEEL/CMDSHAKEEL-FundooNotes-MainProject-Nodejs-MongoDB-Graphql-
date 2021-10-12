@@ -7,7 +7,7 @@ const joiValidation = require('../../utilities/Validation')
 const  bcryptpass = require('../../utilities/bcrypt')
 const bcrtpt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-
+const sendbymail = require('../../utilities/nodemailer')
 const resolvers={
 
     //in Query we can get all data present in database
@@ -92,14 +92,22 @@ const resolvers={
                                                                             tokenExpiration:1
                   }
         },
-        forgotpassword: async(_,{path})=>{
+         forgotpassword: async(_,{path})=>{
 
-            const checkinguser = await userModel.findOne({email:path.email});
-            if(!checkinguser){
-                return new Apollerror.AuthenticationError('user not found .... ')
-            }
-            
-        }
+             const checkinguser = await userModel.findOne({email:path.email});
+             if(!checkinguser){
+                 return new Apollerror.AuthenticationError('user not found .... ')
+             }
+
+             sendbymail.getMailMessage(checkinguser.email,(data)=>{
+                 if(!data){
+                     return new Apollerror.ApolloError('otp sending is failed')
+                 }
+             })
+            return ({
+                email:path.email,
+            })
+         }
          
     }
 }

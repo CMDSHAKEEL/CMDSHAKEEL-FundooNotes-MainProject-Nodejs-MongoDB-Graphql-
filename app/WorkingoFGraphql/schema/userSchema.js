@@ -22,6 +22,10 @@ type Authuser{
 
 }
 
+type Forgot{
+    email:String
+}
+
  
 input userInput{
     firstName:String
@@ -34,6 +38,9 @@ input loginUser{
     email:String
     password:String
 }
+input forgotPassword{
+    email:String
+}
 
  
 
@@ -44,6 +51,7 @@ type Query {
 type Mutation{
     createuser(path:userInput):Users
     loginuser(path:loginUser):Authuser
+    forgotpassword(path:forgotPassword):Forgot
 }
 `
 module.exports = typeDefs;
