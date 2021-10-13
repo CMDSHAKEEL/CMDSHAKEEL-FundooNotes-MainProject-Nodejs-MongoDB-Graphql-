@@ -8,6 +8,8 @@ const  bcryptpass = require('../../utilities/bcrypt')
 const bcrtpt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const sendbymail = require('../../utilities/nodemailer')
+const Note  = require('../../models/model.note')
+
 const resolvers={
 
     //in Query we can get all data present in database
@@ -145,6 +147,16 @@ const resolvers={
                 email:path.email,
                 newpassword:path.newpassword,
             })
+         },
+
+         createnote: async(_,{post})=>{
+            const notes = new Note({
+                title: post.title,
+                description: post.description,
+            })
+            await notes.save();
+            return notes
+
          }
          
     }
