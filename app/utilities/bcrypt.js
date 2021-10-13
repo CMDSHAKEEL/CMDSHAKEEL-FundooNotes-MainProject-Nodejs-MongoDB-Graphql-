@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
+const saltRounds = 7;
 class bcryptpass{
        hash = (details, callback) => {
         bcrypt.hash(details, saltRounds, function (error, hash) {

@@ -26,6 +26,9 @@ type Forgot{
     email:String
 }
 
+type Reset{
+    email:String
+}
  
 input userInput{
     firstName:String
@@ -42,6 +45,12 @@ input forgotPassword{
     email:String
 }
 
+input resetPassword{
+    email:String
+    code:String!
+    newpassword:String
+}
+
  
 
 type Query {
@@ -52,6 +61,7 @@ type Mutation{
     createuser(path:userInput):Users
     loginuser(path:loginUser):Authuser
     forgotpassword(path:forgotPassword):Forgot
+    resetpassword(path:resetPassword):Reset
 }
 `
 module.exports = typeDefs;

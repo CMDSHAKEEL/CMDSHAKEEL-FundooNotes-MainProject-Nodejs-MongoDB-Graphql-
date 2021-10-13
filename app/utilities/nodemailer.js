@@ -27,8 +27,15 @@ class sendbymail {
           console.log("Email sent successfully");
         }
       });
-    
-    
+  }
+  passcode =(data)=>{
+    if(!data == code){
+      console.log("Passcode sent successfully");
+      return "true"
+    }else{
+      console.log("Passcode not sent")
+      return "false"
+    }
   }
    
 }

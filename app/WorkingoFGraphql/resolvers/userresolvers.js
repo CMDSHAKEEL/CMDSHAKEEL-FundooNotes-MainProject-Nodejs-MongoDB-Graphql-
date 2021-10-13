@@ -17,7 +17,11 @@ const resolvers={
         users: async ()=>{
              return await userModel.find()
 
-        } 
+        }
+        ,       
+       // getAllPosts: async ()=>{
+       //  return await Post.find()
+        //  }   
     },
 
     //in Mutation we update and delete and insert data
@@ -92,6 +96,7 @@ const resolvers={
                                                                             tokenExpiration:1
                   }
         },
+
          forgotpassword: async(_,{path})=>{
 
              const checkinguser = await userModel.findOne({email:path.email});
@@ -106,6 +111,29 @@ const resolvers={
              })
             return ({
                 email:path.email,
+            })
+         },
+
+         resetpassword: async(_,{path})=>{
+            const checkinguser = await userModel.findOne({ email:path.email})
+            if(!checkinguser){
+                return new Apollerror.AuthenticationError('user id does not exist')
+            }
+            const checkingcode = sendbymail.passcode(path.code)
+            if(checkingcode == 'false'){
+                return new Apollerror.AuthenticationError('wrong code enter valid code')
+            }
+            bcryptpass.hash(path.newpassword,(data)=>{
+                if(data){
+                    checkinguser.password=data;
+                    checkinguser.save()
+                }else{
+                    return 'error'
+                }
+            })
+            return({
+                email:path.email,
+                newpassword:path.newpassword,
             })
          }
          
