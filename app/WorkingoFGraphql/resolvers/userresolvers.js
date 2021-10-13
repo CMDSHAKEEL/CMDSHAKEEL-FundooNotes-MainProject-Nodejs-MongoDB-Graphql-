@@ -27,6 +27,9 @@ const resolvers={
     //in Mutation we update and delete and insert data
 
     Mutation:{
+
+        // creating new user
+
         createuser:async (_,{path})=>{
           const user = new userModel({
               firstName:path.firstName,
@@ -64,6 +67,9 @@ const resolvers={
  
 
         },
+
+      // login user
+
         loginuser:async(_,{path})=>{
             const login ={
                 email:path.email,
@@ -97,6 +103,8 @@ const resolvers={
                   }
         },
 
+        // implementing Forgot password
+
          forgotpassword: async(_,{path})=>{
 
              const checkinguser = await userModel.findOne({email:path.email});
@@ -114,6 +122,8 @@ const resolvers={
             })
          },
 
+        // Reseting the password 
+        
          resetpassword: async(_,{path})=>{
             const checkinguser = await userModel.findOne({ email:path.email})
             if(!checkinguser){
