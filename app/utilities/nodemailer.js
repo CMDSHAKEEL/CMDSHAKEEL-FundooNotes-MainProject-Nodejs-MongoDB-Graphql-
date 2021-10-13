@@ -28,6 +28,8 @@ class sendbymail {
         }
       });
   }
+
+
   passcode =(data)=>{
     if(data == code){
       console.log("correct-code");

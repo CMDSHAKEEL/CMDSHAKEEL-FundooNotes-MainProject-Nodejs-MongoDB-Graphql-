@@ -19,9 +19,9 @@ const resolvers={
 
         }
         ,       
-       // getAllPosts: async ()=>{
-       //  return await Post.find()
-        //  }   
+        getAllnotes: async ()=>{
+         return await Post.find()
+      }   
     },
 
     //in Mutation we update and delete and insert data

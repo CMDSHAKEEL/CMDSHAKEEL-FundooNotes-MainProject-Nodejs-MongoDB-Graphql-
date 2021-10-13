@@ -1,5 +1,6 @@
 const {gql} =require('apollo-server-express')
 
+
 const typeDefs = gql`
 
  
@@ -29,6 +30,12 @@ type Forgot{
 type Reset{
     email:String
 }
+
+type Post{
+    id:ID
+    title:String
+    description:String
+}
  
 input userInput{
     firstName:String
@@ -51,10 +58,16 @@ input resetPassword{
     newpassword:String
 }
 
+input postInput{
+    title:String
+    description:String
+}
+
  
 
 type Query {
     users:[Users]
+    getAllnotes:[Post]
 }
 
 type Mutation{
@@ -62,6 +75,7 @@ type Mutation{
     loginuser(path:loginUser):Authuser
     forgotpassword(path:forgotPassword):Forgot
     resetpassword(path:resetPassword):Reset
-}
+    createnote(post:postInput):Post
+} 
 `
 module.exports = typeDefs;
