@@ -29,11 +29,11 @@ class sendbymail {
       });
   }
   passcode =(data)=>{
-    if(!data == code){
-      console.log("Passcode sent successfully");
+    if(data == code){
+      console.log("correct-code");
       return "true"
     }else{
-      console.log("Passcode not sent")
+      console.log("wrong-wrong")
       return "false"
     }
   }

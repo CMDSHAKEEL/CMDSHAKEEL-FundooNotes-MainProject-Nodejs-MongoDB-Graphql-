@@ -47,7 +47,7 @@ input forgotPassword{
 
 input resetPassword{
     email:String
-    code:String!
+    Code:String
     newpassword:String
 }
 

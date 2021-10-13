@@ -119,7 +119,7 @@ const resolvers={
             if(!checkinguser){
                 return new Apollerror.AuthenticationError('user id does not exist')
             }
-            const checkingcode = sendbymail.passcode(path.code)
+            const checkingcode = sendbymail.passcode(path.Code)
             if(checkingcode == 'false'){
                 return new Apollerror.AuthenticationError('wrong code enter valid code')
             }
