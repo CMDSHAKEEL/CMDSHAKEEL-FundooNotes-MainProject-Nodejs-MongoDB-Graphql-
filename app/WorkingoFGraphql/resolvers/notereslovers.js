@@ -31,20 +31,14 @@ const notereslovers={
             return notes
 
          },
-         
-
-         // Editing  notes by ID
-
-         editnote: async(args)=>{
-             const { id } = args
-             const {title,description} =args.post
-             const note = await Note.findByIdAndUpdate(id,{title,description})
-             return note
-             console.log(" Post is Successfully Edited")
-         }
+        deletenote: async(parent,args,context,info)=>{
+        const { id } = args
+        await Note.findByIdAndDelete(id)
+        return 'ok notes deleted'
+        }
         
     }
 
-}
+ }
 
 module.exports = notereslovers;
