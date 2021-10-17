@@ -80,7 +80,8 @@ type Mutation{
     resetpassword(path:resetPassword):Reset
     
     createnote(post:postInput):Post
-    updatenote(id:ID,post:postInput):Post
+    deletenote(id:ID):String
+    editnote(id:ID,post:postInput):Post
 } 
 `
 module.exports = typeDefs;
