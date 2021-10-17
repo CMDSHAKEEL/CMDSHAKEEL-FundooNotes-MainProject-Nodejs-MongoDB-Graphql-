@@ -70,6 +70,7 @@ input postInput{
 type Query {
     users:[Users]
     getAllnotes:[Post]
+    getnotes(id:ID):Post
 }
 
 type Mutation{
@@ -77,8 +78,9 @@ type Mutation{
     loginuser(path:loginUser):Authuser
     forgotpassword(path:forgotPassword):Forgot
     resetpassword(path:resetPassword):Reset
+    
     createnote(post:postInput):Post
-    updatenote(post:postInput):Post
+    updatenote(id:ID,post:postInput):Post
 } 
 `
 module.exports = typeDefs;

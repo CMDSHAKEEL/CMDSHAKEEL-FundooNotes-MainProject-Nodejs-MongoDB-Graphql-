@@ -7,7 +7,11 @@ const notereslovers={
 
         getAllnotes: async ()=>{
             return await Note.find()
-         }  
+         },  
+
+         getnotes: async(_,{id})=>{
+            return await Note.findById(id);
+       }
 
     },
 
