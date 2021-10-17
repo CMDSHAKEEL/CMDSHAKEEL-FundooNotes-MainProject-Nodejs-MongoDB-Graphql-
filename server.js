@@ -8,6 +8,8 @@ const graphqlresolver  =  require('././app/WorkingoFGraphql/resolvers/index')
 
 dbConfig.dbConnection();
 
+require('dotenv').config();
+
 async function startserver(){ 
      
 const app = express()
@@ -23,7 +25,7 @@ apolloserver.applyMiddleware({app , path:"/graphql"})
 
 // listening to the port 
 
-app.listen(2000,()=>{
+app.listen(process.env.PORT,()=>{
     console.log("server is running 2000")})
 
 }

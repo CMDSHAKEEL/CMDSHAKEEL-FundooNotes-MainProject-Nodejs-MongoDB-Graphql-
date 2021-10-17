@@ -9,8 +9,8 @@ class sendbymail {
       let transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user:  'cmdshakeel21@gmail.com',
-          pass: 'sdb21051998 ',
+          user: process.env.EMAIL,
+          pass: process.env.PASSWORD,
         },  
 
       });
