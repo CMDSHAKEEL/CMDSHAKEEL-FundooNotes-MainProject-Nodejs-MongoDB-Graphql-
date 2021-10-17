@@ -29,6 +29,8 @@ type Forgot{
 
 type Reset{
     email:String
+    message:String
+    newpassword:String
 }
 
 type Post{
@@ -76,6 +78,7 @@ type Mutation{
     forgotpassword(path:forgotPassword):Forgot
     resetpassword(path:resetPassword):Reset
     createnote(post:postInput):Post
+    updatenote(post:postInput):Post
 } 
 `
 module.exports = typeDefs;

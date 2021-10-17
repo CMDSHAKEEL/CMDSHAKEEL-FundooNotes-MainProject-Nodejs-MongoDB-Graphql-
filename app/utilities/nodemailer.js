@@ -5,6 +5,7 @@ class sendbymail {
   getMailMessage = () => {
  
       code = Math.random().toString(21).substring(3, 17)  
+
       let transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -13,6 +14,7 @@ class sendbymail {
         },  
 
       });
+      
       let mailOptions = {
         from:'cmdshakeel21@gmail.com',
         to: 'cmdshakeel3377@gmail.com' ,
@@ -30,12 +32,12 @@ class sendbymail {
   }
 
 
-  passcode =(data)=>{
+  passcode = (data)=>{
     if(data == code){
       console.log("correct-code");
       return "true"
     }else{
-      console.log("wrong-wrong")
+      console.log("wrong-code")
       return "false"
     }
   }

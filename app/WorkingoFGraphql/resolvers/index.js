@@ -1,3 +1,4 @@
-module.exports = (
-    userresolvers = require('./userresolvers')
-    );
+module.exports = [
+    userresolvers = require('./userresolvers'),
+    noteresolvers = require('./notereslovers')
+];

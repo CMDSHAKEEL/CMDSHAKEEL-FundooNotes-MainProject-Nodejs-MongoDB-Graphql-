@@ -1,14 +1,14 @@
 
 // importing files and packages
 
-const userModel = require('../../models/usermodel')
-const Apollerror = require('apollo-server-errors')
-const joiValidation = require('../../utilities/Validation')
-const  bcryptpass = require('../../utilities/bcrypt')
-const bcrtpt = require('bcrypt')
-const jwt = require('jsonwebtoken')
-const sendbymail = require('../../utilities/nodemailer')
-const Note  = require('../../models/model.note')
+const userModel     =  require('../../models/usermodel')
+const Apollerror    =  require('apollo-server-errors')
+const joiValidation =  require('../../utilities/Validation')
+const bcryptpass    =  require('../../utilities/bcrypt')
+const bcrtpt        =  require('bcrypt')
+const jwt           =  require('jsonwebtoken')
+const sendbymail    =  require('../../utilities/nodemailer') 
+// const Note          =  require('../../models/model.note')
 
 const resolvers={
 
@@ -19,14 +19,14 @@ const resolvers={
         users: async ()=>{
              return await userModel.find()
 
-        }
-        ,       
-        getAllnotes: async ()=>{
-         return await Post.find()
-      }   
+        },
+          
+      //  getAllnotes: async ()=>{
+        // return await Note.find()
+     // }   
     },
 
-    //in Mutation we update and delete and insert data
+    // in Mutation we update and delete and insert data
 
     Mutation:{
 
@@ -59,7 +59,7 @@ const resolvers={
             bcryptpass.hash(path.password, (error,data)=>{
                 if(data){
                     user.password = data
-                    //console.log(data)
+                    console.log(data)
                 }else{
                     throw error;
                 }
@@ -87,6 +87,7 @@ const resolvers={
             }
 
             //checking the password user password and saved password in DB
+            
             const correct = await  bcrtpt.compare(path.password, userPresent.password);
             if (! correct) {
               return new Apollerror.AuthenticationError('wrong password' );
@@ -94,14 +95,14 @@ const resolvers={
 
             // Token generating
 
-            const token =jwt.sign({  email:path.email  },' cmdshakeel123',{
+            const token =jwt.sign({  email:path.email  },'cmdshakeel123',{
                 expiresIn:'1h'
             })
             return{ userId:userPresent.id,
                                 firstName:userPresent.firstName,
-                                             lastName:userPresent.lastName,
-                                                                   token:token,
-                                                                            tokenExpiration:1
+                                               lastName:userPresent.lastName,
+                                                                       token:token,
+                                                                             tokenExpiration:1
                   }
         },
 
@@ -132,13 +133,13 @@ const resolvers={
                 return new Apollerror.AuthenticationError('user id does not exist')
             }
             const checkingcode = sendbymail.passcode(path.Code)
-            if(checkingcode == 'false'){
+            if(checkingcode === 'false'){
                 return new Apollerror.AuthenticationError('wrong code enter valid code')
             }
-            bcryptpass.hash(path.newpassword,(data)=>{
+            bcryptpass.hash(path.newpassword,(error,data)=>{
                 if(data){
                     checkinguser.password=data;
-                    checkinguser.save()
+                    checkinguser.save();
                 }else{
                     return 'error'
                 }
@@ -146,18 +147,32 @@ const resolvers={
             return({
                 email:path.email,
                 newpassword:path.newpassword,
+                message:'new password is created'
             })
          },
+          // creating notes
 
-         createnote: async(_,{post})=>{
-            const notes = new Note({
-                title: post.title,
-                description: post.description,
-            })
-            await notes.save();
-            return notes
+        //  createnote: async(_,{post})=>{
+        //     const notes = new Note({
+        //         title: post.title,
+        //         description: post.description,
+        //     })
+        //     await notes.save();
+        //     return notes
 
-         }
+        //  },
+
+        //  //updating notes
+
+        //  updatenote: async(_,{post})=>{
+        //     const notes ={
+        //         id: post.id,
+        //         title: post.title,
+        //         description: post.description,
+        //     }
+        //      notes =await Note.findByIdAndUpdate({id:post.id})
+        //      return notes
+        //  }
          
     }
 }

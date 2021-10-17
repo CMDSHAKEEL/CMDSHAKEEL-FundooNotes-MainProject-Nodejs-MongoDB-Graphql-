@@ -1,4 +1,3 @@
 userSchema = require('./userSchema');
 
-module.exports = [
-  userSchema];
+module.exports = [ userSchema];

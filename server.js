@@ -1,16 +1,21 @@
-const express = require('express');
-const { ApolloServer} = require('apollo-server-express')
-const dbConfig =  require('./DB.Config/database.config')
-const Schema = require('././app/WorkingoFGraphql/schema/index')
-const graphqlresolver =require('././app/WorkingoFGraphql/resolvers/index')
-require('dotenv').config();
+// importing files and packages
+
+const express          =  require('express');
+const { ApolloServer}  =  require('apollo-server-express')
+const dbConfig         =  require('./DB.Config/database.config')
+const Schema           =  require('././app/WorkingoFGraphql/schema/index')
+const graphqlresolver  =  require('././app/WorkingoFGraphql/resolvers/index')
+
+ 
 
 dbConfig.dbConnection();
 
-async function startserver(){  
-
+async function startserver(){ 
+     
 const app = express()
+  
 //working of graphql 
+
 const apolloserver = new ApolloServer({
     typeDefs:Schema,
     resolvers:graphqlresolver,
@@ -18,8 +23,10 @@ const apolloserver = new ApolloServer({
 await apolloserver.start();
 apolloserver.applyMiddleware({app , path:"/graphql"})
 
+// listening to the port 
+
 app.listen(2000,()=>{
-    console.log("server is runnig 2000")})
+    console.log("server is running 2000")})
 
 }
  
