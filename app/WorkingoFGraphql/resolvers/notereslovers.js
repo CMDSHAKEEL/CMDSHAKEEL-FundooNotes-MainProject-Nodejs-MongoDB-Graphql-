@@ -29,12 +29,21 @@ const notereslovers={
             })
             await notes.save();
             return notes
-
+ 
          },
+         editnote: async(parent,args,context,info)=>{
+             const {id} =args
+            const {title, description} =args.post
+            const note = await Note.findByIdAndUpdate(id,{title,description},{new :true})
+            return note
+         },
+
+         // Deleting Notes by ID  
+
         deletenote: async(parent,args,context,info)=>{
         const { id } = args
         await Note.findByIdAndDelete(id)
-        return 'ok notes deleted'
+        return 'ok  your notes deleted successfully'
         }
         
     }
