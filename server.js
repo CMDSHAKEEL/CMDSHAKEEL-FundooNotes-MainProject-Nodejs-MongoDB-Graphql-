@@ -6,8 +6,6 @@ const dbConfig         =  require('./DB.Config/database.config')
 const Schema           =  require('././app/WorkingoFGraphql/schema/index')
 const graphqlresolver  =  require('././app/WorkingoFGraphql/resolvers/index')
 
- 
-
 dbConfig.dbConnection();
 
 async function startserver(){ 

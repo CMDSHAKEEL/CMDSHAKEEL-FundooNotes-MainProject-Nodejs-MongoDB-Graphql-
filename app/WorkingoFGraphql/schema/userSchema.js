@@ -25,6 +25,7 @@ type Authuser{
 
 type Forgot{
     email:String
+    message:String
 }
 
 type Reset{
@@ -35,6 +36,7 @@ type Reset{
 
 type Post{
     id:ID
+    email:String
     title:String
     description:String
 }
@@ -61,6 +63,7 @@ input resetPassword{
 }
 
 input postInput{
+    email:String
     title:String
     description:String
 }

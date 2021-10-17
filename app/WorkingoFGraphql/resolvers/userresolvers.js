@@ -122,6 +122,7 @@ const resolvers={
              })
             return ({
                 email:path.email,
+                message:'secret code is sent to your register mail id'
             })
          },
 
@@ -147,7 +148,7 @@ const resolvers={
             return({
                 email:path.email,
                 newpassword:path.newpassword,
-                message:'new password is created'
+                message:' your new password is created'
             })
          },
           // creating notes
