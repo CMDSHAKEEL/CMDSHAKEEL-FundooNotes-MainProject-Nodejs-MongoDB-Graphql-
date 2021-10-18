@@ -34,9 +34,11 @@ type Reset{
     newpassword:String
 }
 
+
+
 type Post{
-    id:ID
-    email:String
+    id :ID
+    userId:ID
     title:String
     description:String
 }
@@ -62,8 +64,9 @@ input resetPassword{
     newpassword:String
 }
 
+
 input postInput{
-    email:String
+    userId:ID
     title:String
     description:String
 }

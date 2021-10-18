@@ -1,6 +1,7 @@
 // importing files and packages
 
 const Note          =  require('../../models/model.note')
+
 const userModel     = require('../../models/usermodel')
 
 const notereslovers={
@@ -27,6 +28,7 @@ const notereslovers={
         createnote: async(_,{post})=>{
              
             const notes = new Note({
+                userId: post.userId,
                 title: post.title,
                 description: post.description,
                 email: post.email,
@@ -43,18 +45,26 @@ const notereslovers={
          // Editing Notes By Id 
 
          editnote: async(parent,args,context,info)=>{
+
              const {id} =args
+
             const {title, description} =args.post
+
             const note = await Note.findByIdAndUpdate(id,{title,description},{new :true})
+
             return note
          },
 
          // Deleting Notes by ID  
 
         deletenote: async(parent,args,context,info)=>{
+
         const { id } = args
+
         await Note.findByIdAndDelete(id)
+
         return 'ok  your notes deleted successfully'
+
         }
         
     }
