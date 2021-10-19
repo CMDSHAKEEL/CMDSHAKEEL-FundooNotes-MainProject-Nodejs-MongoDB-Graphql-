@@ -19,15 +19,18 @@ const app = express()
 const apolloserver = new ApolloServer({
     typeDefs:Schema,
     resolvers:graphqlresolver,
+    playground: true,
 })
 await apolloserver.start();
 apolloserver.applyMiddleware({app , path:"/graphql"})
 
 // listening to the port 
-
+ 
 app.listen(process.env.PORT,()=>{
-    console.log("server is running 2000")})
+    console.log("server is running on PORT 2000")})
 
 }
+
  
 startserver()
+ 

@@ -1,7 +1,10 @@
 const mongoose = require('mongoose')
 const NoteSchema = new mongoose.Schema({
     userId:{
-        type:String
+        type:'string'
+    },
+    email:{
+      type:'string',
     },
     title:{
         type: 'string',
