@@ -42,6 +42,10 @@ type Post{
     title:String
     description:String
 }
+
+type Label{
+    labelname:String
+}
  
 input userInput{
     firstName:String
@@ -71,6 +75,11 @@ input postInput{
     description:String
 }
 
+input LabelInput{
+    noteID:ID
+    labelname:String
+}
+
  
 
 type Query {
@@ -88,6 +97,8 @@ type Mutation{
     createnote(post:postInput):Post
     deletenote(id:ID):String
     editnote(id:ID,post:postInput):Post
+
+    createLabel(path:LabelInput):Label
 } 
 `
 module.exports = typeDefs;

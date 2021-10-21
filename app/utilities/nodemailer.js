@@ -16,7 +16,7 @@ class sendbymail {
       });
       
       let mailOptions = {
-        from:'cmdshakeel21@gmail.com',
+        from: process.env.EMAIL,
         to: 'cmdshakeel3377@gmail.com' ,
         subject: 'Fundoo notes Password / resetpass testing',
         text: code
