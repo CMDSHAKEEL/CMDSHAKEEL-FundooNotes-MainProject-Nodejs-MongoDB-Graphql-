@@ -1,9 +1,7 @@
 const mongoose = require('mongoose')
 const NoteSchema = new mongoose.Schema({
-    userId:{
-        type:'string'
-    },
-    email:{
+   
+    emailid:{
       type:'string',
     },
     title:{
@@ -14,5 +12,5 @@ const NoteSchema = new mongoose.Schema({
         type: 'string',
     }
 })
-const Post = mongoose.model('Notes',NoteSchema)
+const Post = mongoose.model('Notess',NoteSchema)
 module.exports = Post;

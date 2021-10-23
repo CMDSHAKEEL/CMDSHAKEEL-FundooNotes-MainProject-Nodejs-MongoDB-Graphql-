@@ -1,6 +1,6 @@
 // importing files and packages
 
-const Note          =  require('../../models/model.note')
+const noteModel        =  require('../../models/model.note')
 
 const userModel     = require('../../models/usermodel')
 
@@ -25,15 +25,16 @@ const notereslovers={
     Mutation:{
         // creating notes
 
-        createnote: async(_,{post})=>{
-             
-            const notes = new Note({
-                userId: post.userId,
+        createnote: async(_,{post},context)=>{
+
+               const existingUser = await userModel.findOne({ email: context.email }); 
+            const notes =  new noteModel({
                 title: post.title,
                 description: post.description,
-                email: post.email,
+                emailid: post.email,
             })
-            const existingUser = await userModel.findOne({ email: post.email });
+                
+  
             if(existingUser){
                 return 'user id already EXIST'
             }
@@ -50,7 +51,7 @@ const notereslovers={
 
             const {title, description} =args.post
 
-            const note = await Note.findByIdAndUpdate(id,{title,description},{new :true})
+            const note = await noteModel.findByIdAndUpdate(id,{title,description},{new :true})
 
             return note
          },

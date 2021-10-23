@@ -1,7 +1,7 @@
  const labelModel = require('../../models/lable.model')
  const Apolloerror = require('apollo-server-errors')
 
- const labelResolvers = {
+ const labelresolvers = {
 
     Query:{
         getLabel : async () =>{
@@ -10,24 +10,49 @@
         }
     },
     Mutation:{
-        createLabel: async (_,{path}) =>{
-            const checkNote = await labelModel.findOne({note: path.noteID})
+        createLabel: async (_,{path},context) =>{
+            const checkNote = await labelModel.findOne({noteId: path.noteID})
             if(checkNote){
                 return new Apolloerror.UserInputError('note is already exist ')
             }
+            const checkinglabel = await labelModel.findOne({labelName:path.labelname})
+            if(checkinglabel){
+                checkinglabel.noteId.push(path.noteID)
+                await checkinglabel.save();
+                return({
+                    labelname:path.labelname,
+                })
+            }
             const labelmodel = new labelModel({
+
                 userId: context.id,
-                noteId: input.noteID,
-                labelName: input.labelname,
+
+                noteId: path.noteID,
+
+                labelName:path.labelname,
+                
             });
 
              
             await labelmodel.save();
             return ({
-                labelname: path.labelname
+                labelName: path.labelName
             })
+        },
+        deleteLabel:async({path})=>{
+             
+            const checkLabel = await labelModel.findOne({ labelName: path.labelname });
+            if (!checkLabel) {
+                return new Apolloerror.UserInputError('Label is not present');
+            }
+            const checkNote = await labelModel.findOne({ noteId: path.noteID });
+            if (!checkNote) {
+                await labelModel.findByIdAndDelete(checkLabel.id);
+            }
+
+            return 'your label is deleted successfully'
         }
     }
 
  }
- module.exports = labelResolvers;
+ module.exports = labelresolvers;
