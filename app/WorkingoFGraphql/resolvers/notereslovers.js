@@ -34,7 +34,8 @@ const notereslovers={
                 emailid: post.email,
             })
                 
-  
+           
+
             if(existingUser){
                 return 'user id already EXIST'
             }

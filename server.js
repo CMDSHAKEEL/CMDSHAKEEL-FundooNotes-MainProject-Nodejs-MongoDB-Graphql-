@@ -5,7 +5,7 @@ const { ApolloServer}  =  require('apollo-server-express')
 const dbConfig         =  require('./DB.Config/database.config')
 const Schema           =  require('././app/WorkingoFGraphql/schema/index')
 const graphqlresolver  =  require('././app/WorkingoFGraphql/resolvers/index')
-const Auth             =  require('./app/utilities/middelware/auth')
+//const Auth             =  require('./app/utilities/middelware/auth')
 
 dbConfig.dbConnection();
 
@@ -18,10 +18,11 @@ const app = express()
 //working of graphql 
 
 const apolloserver = new ApolloServer({
+
     typeDefs:Schema,
     resolvers:graphqlresolver,
-    playground: true,
-    context: Auth
+   
+    //context: Auth
 })
 await apolloserver.start();
 apolloserver.applyMiddleware({app , path:"/graphql"})

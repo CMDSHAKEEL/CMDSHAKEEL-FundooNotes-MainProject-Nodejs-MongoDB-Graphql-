@@ -8,7 +8,7 @@ const bcryptpass    =  require('../../utilities/bcrypt')
 const bcrtpt        =  require('bcrypt')
 const jwt           =  require('jsonwebtoken')
 const sendbymail    =  require('../../utilities/nodemailer') 
-// const Note          =  require('../../models/model.note')
+ 
 
 const resolvers={
 

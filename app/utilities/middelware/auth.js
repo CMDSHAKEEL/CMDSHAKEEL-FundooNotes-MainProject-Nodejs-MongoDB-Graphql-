@@ -1,14 +1,15 @@
 const jwt = require('jsonwebtoken');
 
 
-module.exports = ({ req }) => {
-    const token = req.headers.authorization || ''
+module.exports = ({ context }) => {
+    const token = context.headers.authorization ;
     try {
         if (!token) {
-            return req=false;
+            return  'invalid token pass correct ';
         }
             let decodedToken;   
-            decodedToken=jwt.verify(token, process.env.JWT_SECRET)       
+            decodedToken=jwt.verify(token,   "cmdshakeel123")   
+            console.log(decodedToken)    
             return decodedToken;
         }
     

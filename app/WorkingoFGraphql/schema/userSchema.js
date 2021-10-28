@@ -77,6 +77,7 @@ input resetPassword{
 input postInput{
     title:String
     description:String
+    email:String
 }
 
 input LabelInput{
